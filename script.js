@@ -5,14 +5,47 @@ var generateBtn = document.querySelector("#generate");
 var numberChars = "0123456789";
   var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var lowerChars = "abcdefghijklmnopqrstuvwxyz";
-  var allChars = numberChars + upperChars + lowerChars;
-  var randPasswordArray = Array(passwordLength);
-  randPasswordArray[0] = numberChars;
-  randPasswordArray[1] = upperChars;
-  randPasswordArray[2] = lowerChars;
-  randPasswordArray = randPasswordArray.fill(allChars, 3);
-  return shuffleArray(randPasswordArray.map(function(x) { return x[Math.floor(Math.random() * x.length)] })).join('');
+  
+function generatePassword(){
+  var allcharcters =""
+  // this line is for user input 
+  var passwordlingth = prompt( "How long you want the password to be " ); 
+  if (passwordlingth < 8 ||  passwordlingth > 128){
+    alert( "password must be 8 charcters" );
+    return
+  }
+  // this code give you 2 choice yes or no 
+  var includenumber = confirm("do you want your password to include numbers");
+  var includeuppercase = confirm("do you want your password to include uppercase charcter");
+  var includelowercase = confirm("do you want your password to include lowercase charcter");
+  
+if(includenumber===true ){
+  allcharcters =  allcharcters + numberChars 
+
 }
+if(includeuppercase===true ){
+  allcharcters =  allcharcters + upperChars 
+
+}
+if(includelowercase===true ){
+  allcharcters =  allcharcters + lowerChars
+
+}
+if (allcharcters.length === 0 ){
+  alert("must slecte at least one type of charcter");
+  return
+}
+console.log(allcharcters);
+var resultpassword = ""
+for ( var i = 0; i < passwordlingth; i++ ){
+  var randumnum = Math.floor(Math.random() * allcharcters.length)
+  resultpassword = resultpassword + allcharcters[randumnum]
+  
+}
+    return resultpassword
+}
+
+
 
 // Write password to the #password input
 function writePassword() {
